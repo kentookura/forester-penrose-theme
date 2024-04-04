@@ -4,7 +4,7 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:f="http://www.jonmsterling.com/jms-005P.xml"
   xmlns:mml="http://www.w3.org/1998/Math/MathML"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  xmlns:html="http://www.w3.org/1999/xhtml">
 
   <!-- The following ensures that node not matched by a template will show up as an error. -->
   <xsl:template match="node()|@*">
@@ -21,19 +21,19 @@
   </xsl:template>
 
   <!-- HTML and MathML nodes should be copied with namespace prefixes stripped.-->
-  <xsl:template match="mml:*|xhtml:*">
+  <xsl:template match="mml:*|html:*">
     <xsl:element name="{local-name()}">
       <xsl:apply-templates select="@* | node()" />
     </xsl:element>
   </xsl:template>
 
-  <xsl:template match="@mml:* | @xhtml:*">
+  <xsl:template match="@mml:* | @html:*">
     <xsl:attribute name="{local-name()}">
       <xsl:value-of select="." />
     </xsl:attribute>
   </xsl:template>
-  
-  
+
+
   <xsl:template match="f:p">
     <p>
       <xsl:apply-templates />
@@ -87,8 +87,8 @@
       <xsl:apply-templates />
     </blockquote>
   </xsl:template>
-  
-  
+
+
   <xsl:template match="f:embedded-tex">
     <center>
       <img src="resources/{@hash}.svg" />
