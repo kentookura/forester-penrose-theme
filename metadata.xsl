@@ -93,7 +93,7 @@
       <xsl:text>, &#x20;</xsl:text>
      </xsl:if>
     </xsl:for-each>
-    <xsl:if test="contributor">
+    <xsl:if test="f:contributor">
      <xsl:text>&#x20;with contributions from&#x20;</xsl:text>
      <xsl:for-each select="f:contributor">
       <xsl:apply-templates />

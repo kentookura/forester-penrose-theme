@@ -100,7 +100,7 @@
   </xsl:template>
 
   <xsl:template match="f:mainmatter">
-    <div class="f:tree-content">
+    <div class="tree-content">
       <xsl:apply-templates />
     </div>
   </xsl:template>
