@@ -95,11 +95,19 @@
     </center>
   </xsl:template>
 
-  <xsl:template match="f:error">
+  <xsl:template match="f:error | f:info">
     <span class="error">
       <xsl:apply-templates />
     </span>
   </xsl:template>
+
+  <xsl:template match="f:info">
+   <span class="info">
+    <xsl:apply-templates />
+   </span>
+  </xsl:template>
+
+
 
   <xsl:template match="f:tex[@f:display='block']">
     <xsl:text>\[</xsl:text>
