@@ -21,18 +21,17 @@
   </xsl:template>
 
   <!-- HTML and MathML nodes should be copied with namespace prefixes stripped.-->
-  <xsl:template match="mml:*|html:*">
-    <xsl:element name="{local-name()}">
+  <xsl:template match="html:*">
+    <xsl:element namespace="http://www.w3.org/1999/xhtml" name="{local-name()}">
       <xsl:apply-templates select="@* | node()" />
     </xsl:element>
   </xsl:template>
-
-  <xsl:template match="@mml:* | @html:*">
-    <xsl:attribute name="{local-name()}">
-      <xsl:value-of select="." />
-    </xsl:attribute>
+  
+  <xsl:template match="mml:*">
+    <xsl:element namespace="http://www.w3.org/1998/Math/MathML" name="{local-name()}">
+      <xsl:apply-templates select="@* | node()" />
+    </xsl:element>
   </xsl:template>
-
 
   <xsl:template match="f:p">
     <p>
