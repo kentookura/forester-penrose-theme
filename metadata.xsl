@@ -70,15 +70,15 @@
   <xsl:apply-templates select="f:year" />
  </xsl:template>
 
- <xsl:template match="f:date[@f:href]">
+ <xsl:template match="f:date[@href]">
   <li class="meta-item">
-   <a class="link local" href="{@f:href}">
+   <a class="link local" href="{@href}">
     <xsl:apply-templates select="." mode="date-inner" />
    </a>
   </li>
  </xsl:template>
 
- <xsl:template match="f:date[not(@f:href)]">
+ <xsl:template match="f:date[not(@href)]">
   <li class="meta-item">
    <xsl:apply-templates select="." mode="date-inner" />
   </li>
@@ -106,7 +106,7 @@
   </li>
  </xsl:template>
 
- <xsl:template match="f:meta[@f:name='doi']">
+ <xsl:template match="f:meta[@name='doi']">
   <li class="meta-item">
    <a class="doi link" href="{concat('https://www.doi.org/', .)}">
     <xsl:value-of select="." />
@@ -114,7 +114,7 @@
   </li>
  </xsl:template>
 
- <xsl:template match="f:meta[@f:name='orcid']">
+ <xsl:template match="f:meta[@name='orcid']">
   <li class="meta-item">
    <a class="orcid" href="{concat('https://orcid.org/', .)}">
     <xsl:value-of select="." />
@@ -122,20 +122,20 @@
   </li>
  </xsl:template>
 
- <xsl:template match="f:meta[@f:name='bibtex']">
+ <xsl:template match="f:meta[@name='bibtex']">
   <pre>
    <xsl:value-of select="." />
   </pre>
  </xsl:template>
 
  <xsl:template
-  match="f:meta[@f:name='venue']|f:meta[@f:name='position']|f:meta[@f:name='institution']|f:meta[@f:name='source']">
+  match="f:meta[@name='venue']|f:meta[@name='position']|f:meta[@name='institution']|f:meta[@name='source']">
   <li class="meta-item">
    <xsl:apply-templates />
   </li>
  </xsl:template>
 
- <xsl:template match="f:meta[@f:name='external']">
+ <xsl:template match="f:meta[@name='external']">
   <li class="meta-item">
    <a class="link external" href="{.}">
     <xsl:value-of select="." />
@@ -143,7 +143,7 @@
   </li>
  </xsl:template>
 
- <xsl:template match="f:meta[@f:name='slides']">
+ <xsl:template match="f:meta[@name='slides']">
   <li class="meta-item">
    <a class="link external" href="{.}">
     <xsl:text>Slides</xsl:text>
@@ -151,7 +151,7 @@
   </li>
  </xsl:template>
 
- <xsl:template match="f:meta[@f:name='video']">
+ <xsl:template match="f:meta[@name='video']">
   <li class="meta-item">
    <a class="link external" href="{.}">
     <xsl:text>Video</xsl:text>

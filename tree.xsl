@@ -26,7 +26,7 @@
       </head>
       <body>
         <ninja-keys placeholder="Start typing a note title or ID"></ninja-keys>
-        <xsl:if test="not(/f:tree[@f:root = 'true'])">
+        <xsl:if test="not(/f:tree[@root = 'true'])">
           <header class="header">
             <nav class="nav">
               <div class="logo">
@@ -41,7 +41,7 @@
           <article>
             <xsl:apply-templates select="f:tree" />
           </article>
-          <xsl:if test="f:tree/f:mainmatter/f:tree[not(@f:toc='false')] and not(/f:tree/f:frontmatter/f:meta[@f:name = 'toc']/.='false')">
+          <xsl:if test="f:tree/f:mainmatter/f:tree[not(@toc='false')] and not(/f:tree/f:frontmatter/f:meta[@name = 'toc']/.='false')">
             <nav id="toc">
               <div class="block">
                 <h1>Table of Contents</h1>
@@ -57,7 +57,7 @@
   <xsl:template name="numbered-taxon">
     <span class="taxon">
       <xsl:apply-templates select="f:taxon" />
-      <xsl:if test="(not(../@f:numbered='false') and not(../@f:toc='false') and count(../../f:tree) > 1) or f:number">
+      <xsl:if test="(not(../@numbered='false') and not(../@toc='false') and count(../../f:tree) > 1) or f:number">
         <xsl:if test="f:taxon">
           <xsl:text>&#160;</xsl:text>
         </xsl:if>
@@ -66,11 +66,11 @@
             <xsl:value-of select="f:number" />
           </xsl:when>
           <xsl:otherwise>
-            <xsl:number format="1.1" count="f:tree[ancestor::f:tree and not(@f:toc='false') and not(@f:numbered='false')]" level="multiple" />
+            <xsl:number format="1.1" count="f:tree[ancestor::f:tree and not(@toc='false') and not(@numbered='false')]" level="multiple" />
           </xsl:otherwise>
         </xsl:choose>
       </xsl:if>
-      <xsl:if test="f:taxon or (not(../@f:numbered='false') and not(../@f:toc='false') and count(../../f:tree) > 1) or f:number">
+      <xsl:if test="f:taxon or (not(../@numbered='false') and not(../@toc='false') and count(../../f:tree) > 1) or f:number">
         <xsl:text>.&#160;</xsl:text>
       </xsl:if>
     </span>
@@ -91,7 +91,7 @@
 
   <xsl:template match="f:mainmatter" mode="toc">
     <ul class="block">
-      <xsl:apply-templates select="f:tree[not(@f:toc='false')]" mode="toc" />
+      <xsl:apply-templates select="f:tree[not(@toc='false')]" mode="toc" />
     </ul>
   </xsl:template>
 
@@ -136,18 +136,18 @@
       <div class="metadata">
         <ul>
           <xsl:apply-templates select="f:date" />
-          <xsl:if test="not(f:meta[@f:name = 'author']/.='false')">
+          <xsl:if test="not(f:meta[@name = 'author']/.='false')">
             <xsl:apply-templates select="f:authors" />
           </xsl:if>
-          <xsl:apply-templates select="f:meta[@f:name='position']" />
-          <xsl:apply-templates select="f:meta[@f:name='institution']" />
-          <xsl:apply-templates select="f:meta[@f:name='venue']" />
-          <xsl:apply-templates select="f:meta[@f:name='source']" />
-          <xsl:apply-templates select="f:meta[@f:name='doi']" />
-          <xsl:apply-templates select="f:meta[@f:name='orcid']" />
-          <xsl:apply-templates select="f:meta[@f:name='external']" />
-          <xsl:apply-templates select="f:meta[@f:name='slides']" />
-          <xsl:apply-templates select="f:meta[@f:name='video']" />
+          <xsl:apply-templates select="f:meta[@name='position']" />
+          <xsl:apply-templates select="f:meta[@name='institution']" />
+          <xsl:apply-templates select="f:meta[@name='venue']" />
+          <xsl:apply-templates select="f:meta[@name='source']" />
+          <xsl:apply-templates select="f:meta[@name='doi']" />
+          <xsl:apply-templates select="f:meta[@name='orcid']" />
+          <xsl:apply-templates select="f:meta[@name='external']" />
+          <xsl:apply-templates select="f:meta[@name='slides']" />
+          <xsl:apply-templates select="f:meta[@name='video']" />
         </ul>
       </div>
     </header>
@@ -159,7 +159,7 @@
         <xsl:value-of select="f:frontmatter/f:number" />
       </xsl:when>
       <xsl:otherwise>
-        <xsl:number format="1.1" count="f:tree[ancestor::f:tree and not(@f:toc='false') and not(@f:numbered='false')]" level="multiple" />
+        <xsl:number format="1.1" count="f:tree[ancestor::f:tree and not(@toc='false') and not(@numbered='false')]" level="multiple" />
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -168,33 +168,33 @@
     <a class="link local">
       <xsl:attribute name="href">
         <xsl:choose>
-          <xsl:when test="key('tree-with-addr',current()/@f:addr)">
+          <xsl:when test="key('tree-with-addr',current()/@addr)">
             <xsl:text>#tree-</xsl:text>
-            <xsl:value-of select="key('tree-with-addr',current()/@f:addr)/f:frontmatter/f:anchor" />
+            <xsl:value-of select="key('tree-with-addr',current()/@addr)/f:frontmatter/f:anchor" />
           </xsl:when>
           <xsl:otherwise>
-            <xsl:value-of select="@f:href" />
+            <xsl:value-of select="@href" />
           </xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>
 
       <xsl:choose>
-        <xsl:when test="@f:taxon">
-          <xsl:value-of select="@f:taxon" />
+        <xsl:when test="@taxon">
+          <xsl:value-of select="@taxon" />
         </xsl:when>
         <xsl:otherwise>§</xsl:otherwise>
       </xsl:choose>
       <xsl:text>&#160;</xsl:text>
       <xsl:choose>
-        <xsl:when test="@f:number">
-          <xsl:value-of select="@f:number" />
+        <xsl:when test="@number">
+          <xsl:value-of select="@number" />
         </xsl:when>
-        <xsl:when test="key('tree-with-addr',current()/@f:addr)[not(@f:numbered='false') and not(@f:toc='false')]">
-          <xsl:apply-templates select="key('tree-with-addr',current()/@f:addr)[1]" mode="tree-number" />
+        <xsl:when test="key('tree-with-addr',current()/@addr)[not(@numbered='false') and not(@toc='false')]">
+          <xsl:apply-templates select="key('tree-with-addr',current()/@addr)[1]" mode="tree-number" />
         </xsl:when>
         <xsl:otherwise>
           <xsl:text>[</xsl:text>
-          <xsl:value-of select="@f:addr" />
+          <xsl:value-of select="@addr" />
           <xsl:text>]</xsl:text>
         </xsl:otherwise>
       </xsl:choose>
@@ -249,15 +249,15 @@
     <section>
       <xsl:attribute name="lang">
         <xsl:choose>
-          <xsl:when test="f:frontmatter/f:meta[@f:name='lang']">
-            <xsl:value-of select="f:frontmatter/f:meta[@f:name='lang']" />
+          <xsl:when test="f:frontmatter/f:meta[@name='lang']">
+            <xsl:value-of select="f:frontmatter/f:meta[@name='lang']" />
           </xsl:when>
           <xsl:otherwise>en</xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>
 
       <xsl:choose>
-        <xsl:when test="@f:show-metadata = 'false'">
+        <xsl:when test="@show-metadata = 'false'">
           <xsl:attribute name="class">block hide-metadata</xsl:attribute>
         </xsl:when>
         <xsl:otherwise>
@@ -271,16 +271,16 @@
       </xsl:if>
 
       <xsl:choose>
-        <xsl:when test="not(@f:show-heading='false')">
+        <xsl:when test="not(@show-heading='false')">
           <details id="{concat('tree-',f:frontmatter/f:anchor)}">
-            <xsl:if test="not(@f:expanded = 'false')">
+            <xsl:if test="not(@expanded = 'false')">
               <xsl:attribute name="open">open</xsl:attribute>
             </xsl:if>
             <summary>
               <xsl:apply-templates select="f:frontmatter" />
             </summary>
             <xsl:apply-templates select="f:mainmatter" />
-            <xsl:apply-templates select="f:frontmatter/f:meta[@f:name='bibtex']" />
+            <xsl:apply-templates select="f:frontmatter/f:meta[@name='bibtex']" />
           </details>
         </xsl:when>
         <xsl:otherwise>

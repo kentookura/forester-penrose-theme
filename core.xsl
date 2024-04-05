@@ -109,13 +109,13 @@
 
 
 
-  <xsl:template match="f:tex[@f:display='block']">
+  <xsl:template match="f:tex[@display='block']">
     <xsl:text>\[</xsl:text>
     <xsl:value-of select="." />
     <xsl:text>\]</xsl:text>
   </xsl:template>
 
-  <xsl:template match="f:tex[not(@f:display='block')]">
+  <xsl:template match="f:tex[not(@display='block')]">
     <xsl:text>\(</xsl:text>
     <xsl:value-of select="." />
     <xsl:text>\)</xsl:text>
