@@ -8,6 +8,7 @@
   <xsl:include href="metadata.xsl" />
   <xsl:include href="links.xsl" />
   <xsl:include href="tree.xsl" />
+  <xsl:include href="penrose.xsl" />
 
   <!-- <xsl:template match="pause"></xsl:template> -->
 
